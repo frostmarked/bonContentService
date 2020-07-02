@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Fragment.
+    -->
+    <changeSet id="20200702180022-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="fragment_id"
+                                 baseTableName="bon_content_fragment_tag"
+                                 constraintName="fk_bon_content_fragment_tag_bon_content_fragment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bon_content_fragment"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="bon_content_fragment_tag"
+                                 constraintName="fk_bon_content_fragment_tag_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bon_content_tag"/>
+        
+        <addForeignKeyConstraint baseColumnNames="story_id"
+                                 baseTableName="bon_content_fragment"
+                                 constraintName="fk_bon_content_fragment_story_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bon_content_story"/>
+
+    </changeSet>
+</databaseChangeLog>
