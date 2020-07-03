@@ -1,17 +1,26 @@
 package com.bonlimousin.content.web.rest;
 
-import com.bonlimousin.content.BonContentServiceApp;
-import com.bonlimousin.content.domain.LocalizedEntity;
-import com.bonlimousin.content.domain.FragmentEntity;
-import com.bonlimousin.content.repository.LocalizedRepository;
-import com.bonlimousin.content.repository.search.LocalizedSearchRepository;
-import com.bonlimousin.content.service.LocalizedService;
-import com.bonlimousin.content.service.dto.LocalizedCriteria;
-import com.bonlimousin.content.service.LocalizedQueryService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Collections;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +32,15 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
-import javax.persistence.EntityManager;
-import java.util.Collections;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import com.bonlimousin.content.BonContentServiceApp;
+import com.bonlimousin.content.domain.FragmentEntity;
+import com.bonlimousin.content.domain.LocalizedEntity;
 import com.bonlimousin.content.domain.enumeration.UserRole;
+import com.bonlimousin.content.repository.LocalizedRepository;
+import com.bonlimousin.content.repository.search.LocalizedSearchRepository;
+import com.bonlimousin.content.service.LocalizedQueryService;
+import com.bonlimousin.content.service.LocalizedService;
 /**
  * Integration tests for the {@link LocalizedResource} REST controller.
  */
@@ -104,12 +109,12 @@ public class LocalizedResourceIT {
             .visibility(DEFAULT_VISIBILITY);
         // Add required entity
         FragmentEntity fragment;
-        if (TestUtil.findAll(em, Fragment.class).isEmpty()) {
+        if (TestUtil.findAll(em, FragmentEntity.class).isEmpty()) {
             fragment = FragmentResourceIT.createEntity(em);
             em.persist(fragment);
             em.flush();
         } else {
-            fragment = TestUtil.findAll(em, Fragment.class).get(0);
+            fragment = TestUtil.findAll(em, FragmentEntity.class).get(0);
         }
         localizedEntity.setFragment(fragment);
         return localizedEntity;
@@ -130,12 +135,12 @@ public class LocalizedResourceIT {
             .visibility(UPDATED_VISIBILITY);
         // Add required entity
         FragmentEntity fragment;
-        if (TestUtil.findAll(em, Fragment.class).isEmpty()) {
+        if (TestUtil.findAll(em, FragmentEntity.class).isEmpty()) {
             fragment = FragmentResourceIT.createUpdatedEntity(em);
             em.persist(fragment);
             em.flush();
         } else {
-            fragment = TestUtil.findAll(em, Fragment.class).get(0);
+            fragment = TestUtil.findAll(em, FragmentEntity.class).get(0);
         }
         localizedEntity.setFragment(fragment);
         return localizedEntity;

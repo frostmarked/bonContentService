@@ -1,20 +1,30 @@
 package com.bonlimousin.content.web.rest;
 
-import com.bonlimousin.content.BonContentServiceApp;
-import com.bonlimousin.content.domain.FragmentEntity;
-import com.bonlimousin.content.domain.LocalizedEntity;
-import com.bonlimousin.content.domain.TagEntity;
-import com.bonlimousin.content.domain.StoryEntity;
-import com.bonlimousin.content.repository.FragmentRepository;
-import com.bonlimousin.content.repository.search.FragmentSearchRepository;
-import com.bonlimousin.content.service.FragmentService;
-import com.bonlimousin.content.service.dto.FragmentCriteria;
-import com.bonlimousin.content.service.FragmentQueryService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,20 +36,18 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
-import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import com.bonlimousin.content.BonContentServiceApp;
+import com.bonlimousin.content.domain.FragmentEntity;
+import com.bonlimousin.content.domain.LocalizedEntity;
+import com.bonlimousin.content.domain.StoryEntity;
+import com.bonlimousin.content.domain.TagEntity;
 import com.bonlimousin.content.domain.enumeration.FragmentTemplate;
 import com.bonlimousin.content.domain.enumeration.UserRole;
+import com.bonlimousin.content.repository.FragmentRepository;
+import com.bonlimousin.content.repository.search.FragmentSearchRepository;
+import com.bonlimousin.content.service.FragmentQueryService;
+import com.bonlimousin.content.service.FragmentService;
 /**
  * Integration tests for the {@link FragmentResource} REST controller.
  */
@@ -140,12 +148,12 @@ public class FragmentResourceIT {
             .visibility(DEFAULT_VISIBILITY);
         // Add required entity
         StoryEntity story;
-        if (TestUtil.findAll(em, Story.class).isEmpty()) {
+        if (TestUtil.findAll(em, StoryEntity.class).isEmpty()) {
             story = StoryResourceIT.createEntity(em);
             em.persist(story);
             em.flush();
         } else {
-            story = TestUtil.findAll(em, Story.class).get(0);
+            story = TestUtil.findAll(em, StoryEntity.class).get(0);
         }
         fragmentEntity.setStory(story);
         return fragmentEntity;
@@ -172,12 +180,12 @@ public class FragmentResourceIT {
             .visibility(UPDATED_VISIBILITY);
         // Add required entity
         StoryEntity story;
-        if (TestUtil.findAll(em, Story.class).isEmpty()) {
+        if (TestUtil.findAll(em, StoryEntity.class).isEmpty()) {
             story = StoryResourceIT.createUpdatedEntity(em);
             em.persist(story);
             em.flush();
         } else {
-            story = TestUtil.findAll(em, Story.class).get(0);
+            story = TestUtil.findAll(em, StoryEntity.class).get(0);
         }
         fragmentEntity.setStory(story);
         return fragmentEntity;
