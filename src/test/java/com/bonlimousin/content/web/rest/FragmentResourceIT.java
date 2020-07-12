@@ -1153,7 +1153,7 @@ public class FragmentResourceIT {
     public void getAllFragmentsByTagIsEqualToSomething() throws Exception {
         // Initialize the database
         fragmentRepository.saveAndFlush(fragmentEntity);
-        TagEntity tag = TagResourceIT.createEntity(em);
+        TagEntity tag = com.bonlimousin.content.web.rest.TagResourceIT.createEntity(em);
         em.persist(tag);
         em.flush();
         fragmentEntity.addTag(tag);
