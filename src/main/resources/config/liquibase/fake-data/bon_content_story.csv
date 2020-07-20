@@ -1,0 +1,10 @@
+id;category;name;visibility
+1;NEWS;quantify;ROLE_ADMIN
+2;NEWS;Focused Yuan Renminbi;ROLE_ANONYMOUS
+3;CATTLE;invoice;ROLE_ANONYMOUS
+4;NEWS;Montserrat redefine;ROLE_USER
+6;NEWS;Brand Profit-focused;ROLE_ANONYMOUS
+7;IT;Money Market Account Granite Upgradable;ROLE_ANONYMOUS
+8;MATRILINEALITY;navigating;ROLE_ADMIN
+9;MATRILINEALITY;Regional turquoise;ROLE_ANONYMOUS
+10;CATTLE;Refined Rubber Keyboard Total;ROLE_USER

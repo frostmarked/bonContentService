@@ -1,0 +1,11 @@
+id;template;name;title;ingress;body;image;image_content_type;caption;width;height;order_no;visibility;story_id
+1;V2;CSS streamline;Garden Bike;invoice;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;De-engineered Egyptian Pound Berkshire;85393;79467;51732;ROLE_ANONYMOUS;1
+2;V1;Ohio Unbranded;deposit systematic;Personal Loan Account algorithm payment;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;multi-byte software Cheese;98954;3027;39260;ROLE_ANONYMOUS;2
+3;V3;ubiquitous THX;Dominican Republic Pizza;Serbia Unbranded withdrawal;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Senior;99707;79848;64435;ROLE_ANONYMOUS;3
+4;V1;Designer;Music;quantifying backing up;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;SMS Ergonomic;59086;40132;64841;ROLE_ADMIN;4
+5;V2;Turkey;Maryland Soap;Auto Loan Account;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Cotton yellow;29410;54332;61852;ROLE_USER;5
+6;V1;South Carolina;attitude Tasty EXE;emulation Granite demand-driven;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;revolutionize Kids dot-com;471;49139;62279;ROLE_ADMIN;6
+7;V3;Savings Account;Chief sexy;bypass Libyan Arab Jamahiriya;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Divide aggregate bus;4550;94375;13812;ROLE_ADMIN;7
+8;V3;Personal Loan Account time-frame Personal Loan Account;connect;global;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Computers;79577;77266;73438;ROLE_ANONYMOUS;8
+9;V3;Computers Tasty Frozen;Multi-layered Investor bluetooth;collaborative;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Frozen Administrator Park;54698;38142;32519;ROLE_ANONYMOUS;9
+10;V2;incentivize Berkshire;Bridge Fresh;synthesizing;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Wooden Movies multi-byte;28300;96437;90494;ROLE_ADMIN;10
